@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+@section head{
+    @Styles.Render("~/Content/css/jqgrid-redmond")
+
+}
+
+<table id="jqGrid"></table>
+<div id="jqGridPager"></div>
+
+@section JSSection{
+
+    @Scripts.Render("~/bundles/jqgrid")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            jQuery.jgrid.jqGridImport("jqGrid", { impurl: "@ViewBag.ConfigXml", xmlGrid: { config: "root>grid" } });
+
+            setTimeout(function () {
+                $("#jqGrid").navGrid("#jqGridPager", { edit: false, add: false, del: false, refresh: true, view: false, search: true }
+                , {}, {}, {}, { multipleSearch: true, multipleGroup: true, showQuery: true })
+                .navButtonAdd("#jqGridPager", { caption: "Send Email", onClickButton: function () { alert("Sending Email."); }, position: "last" })
+            }, 3000);
+
+            //set to resize jqgrid when hide/show nav button pressed
+            if ($('.fa-bars').length > 0) {
+                $('.fa-bars').on('click', function () {
+                    $('#jqGrid').setGridWidth($('#contentarea').width(), true);
+                });
+            }
+
+            //resize jqgrid when window is resized
+            $(window).bind('resize', function () {
+                $('#jqGrid').setGridWidth($('#contentarea').width(), true);
+            }).trigger('resize');
+
+        });
+
+    </script>
+}
+
+@*@RenderBody()*@

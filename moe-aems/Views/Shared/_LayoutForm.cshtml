@@ -1,0 +1,42 @@
+﻿@model CMSFormConfig
+
+@{
+    ViewBag.Title = Model.name;
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="form-panel">
+    <form class="form-horizontal style-form" method="get">
+    @Html.Partial("_FormBuilder", 
+        new Tuple<CMSForm, IList<CMSFormField>>(Model.formsetting,Model.fields))
+    </form>
+</div>
+
+@section JSSection{
+    @Scripts.Render("~/bundles/knockoutjs")
+
+    <script type="text/javascript">
+
+        var url = window.location.pathname;
+        var profileId = url.substring(url.lastIndexOf('/') + 1);
+
+        $(document).ready(function () {
+            
+            var Collection = function () {
+                var self = this;
+
+                $.ajax({
+                    url: '@Model.dataUrl' + profileId,
+                    async: false,
+                    dataType: 'json',
+                    success: function (json) {
+                        @Html.Partial("_KnockoutBuilder", @Model)
+                    }
+                });
+            }
+
+            ko.applyBindings(new Collection());
+
+        });
+    </script>
+}

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Schools">
+      <EntityTypeMapping TypeName="Model.School">
+        <MappingFragment StoreEntitySet="School">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SchoolCode" ColumnName="SchoolCode" />
+          <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+          <ScalarProperty Name="SchoolType" ColumnName="SchoolType" />
+          <ScalarProperty Name="SchoolLevel" ColumnName="SchoolLevel" />
+          <ScalarProperty Name="Cluster" ColumnName="Cluster" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="PrincipalName" ColumnName="PrincipalName" />
+          <ScalarProperty Name="VpName" ColumnName="VpName" />
+          <ScalarProperty Name="AdminVPName" ColumnName="AdminVPName" />
+          <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
+          <ScalarProperty Name="EvenOdd" ColumnName="EvenOdd" />
+          <ScalarProperty Name="ExtendSADeadline" ColumnName="ExtendSADeadline" />
+          <ScalarProperty Name="NewSADeadline" ColumnName="NewSADeadline" />
+          <ScalarProperty Name="ExceptionYearForApplyAward" ColumnName="ExceptionYearForApplyAward" />
+          <ScalarProperty Name="IntegratedProgramme" ColumnName="IntegratedProgramme" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EV20012005" ColumnName="EV20012005" />
+          <ScalarProperty Name="EV20062010" ColumnName="EV20062010" />
+          <ScalarProperty Name="EV20112015" ColumnName="EV20112015" />
+          <ScalarProperty Name="EV20162020" ColumnName="EV20162020" />
+          <ScalarProperty Name="ExtendDeclareDeadline" ColumnName="ExtendDeclareDeadline" />
+          <ScalarProperty Name="NewDeclareDeadline" ColumnName="NewDeclareDeadline" />
+          <ScalarProperty Name="ExtendAwardAppDeadline" ColumnName="ExtendAwardAppDeadline" />
+          <ScalarProperty Name="NewAwardAppDeadline" ColumnName="NewAwardAppDeadline" />
+          <ScalarProperty Name="NXTEVYEAR" ColumnName="NXTEVYEAR" />
+          <ScalarProperty Name="BESTPRACTICE" ColumnName="BESTPRACTICE" />
+          <ScalarProperty Name="SASubmissionYear" ColumnName="SASubmissionYear" />
+          <ScalarProperty Name="ActiveYear" ColumnName="ActiveYear" />
+          <ScalarProperty Name="InActiveYear" ColumnName="InActiveYear" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SchoolClusters">
+      <EntityTypeMapping TypeName="Model.SchoolCluster">
+        <MappingFragment StoreEntitySet="SchoolCluster">
+          <ScalarProperty Name="SortNo" ColumnName="SortNo" />
+          <ScalarProperty Name="Zone" ColumnName="Zone" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SchoolZones">
+      <EntityTypeMapping TypeName="Model.SchoolZone">
+        <MappingFragment StoreEntitySet="SchoolZone">
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+          <ScalarProperty Name="SortNo" ColumnName="SortNo" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

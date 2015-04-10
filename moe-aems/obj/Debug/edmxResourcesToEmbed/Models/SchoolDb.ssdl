@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="School">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SchoolCode" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="SchoolName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="SchoolType" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="SchoolLevel" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Cluster" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PostalCode" Type="varchar" MaxLength="6" Nullable="false" />
+    <Property Name="Tel" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Fax" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PrincipalName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="VpName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="AdminVPName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SchoolYear" Type="int" Nullable="false" />
+    <Property Name="EvenOdd" Type="varchar" MaxLength="4" Nullable="false" />
+    <Property Name="ExtendSADeadline" Type="bit" Nullable="false" />
+    <Property Name="NewSADeadline" Type="datetime" />
+    <Property Name="ExceptionYearForApplyAward" Type="int" Nullable="false" />
+    <Property Name="IntegratedProgramme" Type="bit" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="EV20012005" Type="int" />
+    <Property Name="EV20062010" Type="int" />
+    <Property Name="EV20112015" Type="int" />
+    <Property Name="EV20162020" Type="int" />
+    <Property Name="ExtendDeclareDeadline" Type="bit" Nullable="false" />
+    <Property Name="NewDeclareDeadline" Type="datetime" />
+    <Property Name="ExtendAwardAppDeadline" Type="bit" Nullable="false" />
+    <Property Name="NewAwardAppDeadline" Type="datetime" />
+    <Property Name="NXTEVYEAR" Type="int" />
+    <Property Name="BESTPRACTICE" Type="bit" />
+    <Property Name="SASubmissionYear" Type="int" />
+    <Property Name="ActiveYear" Type="int" />
+    <Property Name="InActiveYear" Type="int" />
+  </EntityType>
+  <EntityType Name="SchoolCluster">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Zone" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="SortNo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SchoolZone">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SortNo" Type="int" Nullable="false" />
+    <Property Name="ShortDescription" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_School_SchoolCluster">
+    <End Role="SchoolCluster" Type="Self.SchoolCluster" Multiplicity="1" />
+    <End Role="School" Type="Self.School" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolCluster">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="School">
+        <PropertyRef Name="Cluster" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SchoolCluster_SchoolZone">
+    <End Role="SchoolZone" Type="Self.SchoolZone" Multiplicity="1" />
+    <End Role="SchoolCluster" Type="Self.SchoolCluster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolZone">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="SchoolCluster">
+        <PropertyRef Name="Zone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SchoolCluster" EntityType="Self.SchoolCluster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SchoolZone" EntityType="Self.SchoolZone" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_School_SchoolCluster" Association="Self.FK_School_SchoolCluster">
+      <End Role="SchoolCluster" EntitySet="SchoolCluster" />
+      <End Role="School" EntitySet="School" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SchoolCluster_SchoolZone" Association="Self.FK_SchoolCluster_SchoolZone">
+      <End Role="SchoolZone" EntitySet="SchoolZone" />
+      <End Role="SchoolCluster" EntitySet="SchoolCluster" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

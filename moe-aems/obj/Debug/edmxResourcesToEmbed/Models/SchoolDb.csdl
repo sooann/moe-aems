@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="School">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SchoolCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SchoolName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SchoolType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SchoolLevel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Cluster" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PostalCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrincipalName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="VpName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AdminVPName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SchoolYear" Type="Int32" Nullable="false" />
+    <Property Name="EvenOdd" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ExtendSADeadline" Type="Boolean" Nullable="false" />
+    <Property Name="NewSADeadline" Type="DateTime" Precision="3" />
+    <Property Name="ExceptionYearForApplyAward" Type="Int32" Nullable="false" />
+    <Property Name="IntegratedProgramme" Type="Boolean" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EV20012005" Type="Int32" />
+    <Property Name="EV20062010" Type="Int32" />
+    <Property Name="EV20112015" Type="Int32" />
+    <Property Name="EV20162020" Type="Int32" />
+    <Property Name="ExtendDeclareDeadline" Type="Boolean" Nullable="false" />
+    <Property Name="NewDeclareDeadline" Type="DateTime" Precision="3" />
+    <Property Name="ExtendAwardAppDeadline" Type="Boolean" Nullable="false" />
+    <Property Name="NewAwardAppDeadline" Type="DateTime" Precision="3" />
+    <Property Name="NXTEVYEAR" Type="Int32" />
+    <Property Name="BESTPRACTICE" Type="Boolean" />
+    <Property Name="SASubmissionYear" Type="Int32" />
+    <Property Name="ActiveYear" Type="Int32" />
+    <Property Name="InActiveYear" Type="Int32" />
+    <NavigationProperty Name="SchoolCluster" Relationship="Model.FK_School_SchoolCluster" FromRole="School" ToRole="SchoolCluster" />
+  </EntityType>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Schools" EntityType="Self.School" />
+    <EntitySet Name="SchoolClusters" EntityType="Model.SchoolCluster" />
+    <EntitySet Name="SchoolZones" EntityType="Model.SchoolZone" />
+    <AssociationSet Name="FK_School_SchoolCluster" Association="Model.FK_School_SchoolCluster">
+      <End Role="SchoolCluster" EntitySet="SchoolClusters" />
+      <End Role="School" EntitySet="Schools" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SchoolCluster_SchoolZone" Association="Model.FK_SchoolCluster_SchoolZone">
+      <End Role="SchoolZone" EntitySet="SchoolZones" />
+      <End Role="SchoolCluster" EntitySet="SchoolClusters" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SchoolCluster">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Zone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="SortNo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Schools" Relationship="Model.FK_School_SchoolCluster" FromRole="SchoolCluster" ToRole="School" a:GetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Private" />
+    <NavigationProperty Name="SchoolZone" Relationship="Model.FK_SchoolCluster_SchoolZone" FromRole="SchoolCluster" ToRole="SchoolZone" />
+  </EntityType>
+  <EntityType Name="SchoolZone">
+    <Key>
+      <PropertyRef Name="Code" />
+    </Key>
+    <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SortNo" Type="Int32" Nullable="false" />
+    <Property Name="ShortDescription" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SchoolClusters" Relationship="Model.FK_SchoolCluster_SchoolZone" FromRole="SchoolZone" ToRole="SchoolCluster" a:GetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Private" />
+  </EntityType>
+  <Association Name="FK_School_SchoolCluster">
+    <End Type="Model.SchoolCluster" Role="SchoolCluster" Multiplicity="1" />
+    <End Type="Model.School" Role="School" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolCluster">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="School">
+        <PropertyRef Name="Cluster" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SchoolCluster_SchoolZone">
+    <End Type="Model.SchoolZone" Role="SchoolZone" Multiplicity="1" />
+    <End Type="Model.SchoolCluster" Role="SchoolCluster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolZone">
+        <PropertyRef Name="Code" />
+      </Principal>
+      <Dependent Role="SchoolCluster">
+        <PropertyRef Name="Zone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

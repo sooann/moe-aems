@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @RenderSection("head", required: false)
+    @Styles.Render("~/Content/css/bootstrap")
+    
+</head>
+<body>
+    <section id="container">
+        <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+        <!--header start-->
+        <header class="header black-bg">
+            <div class="sidebar-toggle-box">
+                <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation" id="btnToogleNav" ></div>
+            </div>
+            <!--logo start-->
+            <a href="index.html" class="logo"><b>MOE AEMS</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+
+                </ul>
+                <!--  notification end -->
+            </div>
+            <div class="top-menu">
+                <ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="login.html">Logout</a></li>
+                </ul>
+            </div>
+        </header>
+        <!--header end-->
+
+        <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+        <!--sidebar start-->
+        <aside>
+            <div id="sidebar" class="nav-collapse">
+                <!-- sidebar menu start-->
+                <ul class="sidebar-menu" id="nav-accordion">
+                    <li class="sub-menu">
+                        <a href="javascript:;">
+                            <i class="fa fa-desktop"></i>
+                            <span>Administration</span>
+                        </a>
+                        <ul class="sub">
+                            <li><a href="general.html">List Settings</a></li>
+                            <li><a href="buttons.html">Form Settings</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- sidebar menu end-->
+            </div>
+        </aside>
+        <!--sidebar end-->
+
+        <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <h3><i class="fa fa-angle-right"></i> @ViewBag.Title</h3>
+                <div class="row mt">
+                    <div class="col-lg-12" id="contentarea">
+                        @RenderBody()
+                    </div>
+                </div>
+            </section><!-- /wrapper -->
+        </section><!-- /MAIN CONTENT -->
+        <!--main content end-->
+        
+        <!-- **********************************************************************************************************************************************************
+        FOOTER CONTENT
+        *********************************************************************************************************************************************************** -->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                2014 - Derek Tan
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("JSSection", required: false)
+    <script>
+        //custom select box
+
+        $(function () {
+            if ($('select').length > 0) {
+                $('select.styled').customSelect();
+            }
+        });
+
+    </script>
+
+</body>
+</html>

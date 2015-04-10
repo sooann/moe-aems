@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArrayOfCMSRoute>
+  <CMSRoute>
+    <Url>School</Url>
+    <ModuleType>List</ModuleType>
+    <Module>School</Module>
+    <ConfigXml>/Content/xml/SchoolList.xml</ConfigXml>
+  </CMSRoute>
+  <CMSRoute>
+    <Url>SchoolCluster</Url>
+    <ModuleType>List</ModuleType>
+    <Module>SchoolCluster</Module>
+    <ConfigXml>/Content/xml/SchoolClusterList.xml</ConfigXml>
+  </CMSRoute>
+</ArrayOfCMSRoute>

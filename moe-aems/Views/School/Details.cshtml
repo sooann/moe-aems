@@ -1,0 +1,76 @@
+﻿@model School
+
+@{
+    ViewBag.Title = "Update School Details";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="form-panel">
+    <h4 class="mb" >@Model.SchoolName</h4>
+    <hr />
+    <form class="form-horizontal style-form" method="get">
+        <div class="form-group">
+            <label class="control-label col-md-2" for="SchoolCode">School Code</label>
+            <div class="col-md-10">
+                <input type="text" name="SchoolCode" class="form-control" data-bind="value: SchoolCode" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="SchoolName">School Name</label>
+            <div class="col-md-10">
+                <input type="text" name="SchoolName" class="form-control" data-bind="value: SchoolName" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="SchoolName">Principal Name</label>
+            <div class="col-md-10">
+                <input type="text" name="PrincipalName" class="form-control" data-bind="value: PrincipalName" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" data-bind="click:SaveData" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section JSSection{
+    @Scripts.Render("~/bundles/knockoutjs")
+
+    <script type="text/javascript">
+
+        var url = window.location.pathname;
+        var profileId = url.substring(url.lastIndexOf('/') + 1);
+
+        $(document).ready(function () {
+            
+            var Collection = function () {
+                var self = this;
+
+                $.ajax({
+                    url: '/api/GridData/School/' + profileId,
+                    async: false,
+                    dataType: 'json',
+                    success: function (json) {
+                        //self.profile = ko.observable(new viewModel(json));
+                        self.SchoolCode = ko.observable(json ? json.SchoolCode : '');
+                        self.SchoolName = ko.observable(json ? json.SchoolName : '');
+                        self.PrincipalName = ko.observable(json ? json.PrincipalName : '');
+                    }
+                });
+            }
+
+            ko.applyBindings(new Collection());
+
+        });
+
+    </script>
+}
